@@ -1,45 +1,57 @@
-#include<stdio.h>
-#include<string.h>
-struct student
-	{
-	char name[50];
-	int roll;
-	int marks[3];
-	float avg;
-	}
-int main()
-	{
-	int n,i;
-	int total=0;
-printf("Enter the number of students:");
-scanf("%d",&n);
-struct student s[n];
-for(i=0;i<n;i++)
-	{
-	printf("\nEnter detail for students%d:\n",i+1);
-	printf("Name:");
-	scanf("%s",s[i].name);
-	printf("Roll number:");
-	scanf("%d",&s[i].roll);
-	s[i].total=0;
-	for(j=0;j<3;j++)
-		{
-		printf("Enter marks for subject%d:",j+1);
-		scanf("%d",&s[i].marks[i]);
-		total+=s[i].marks[i];
-		}
-	s[i].avg=s[i] total/3;
-	printf("\nStudent Details:\n");
-	for(i=0;i<n;i++)
-		{
-		printf("\nStudent %d\n",i+1);
-		printf("Name:%d\n",s[i].name);
-		printf("Roll Number:%d\n",s[i].roll);
-		printf("Average Marks: %.2f\n",s[i].avg);
-		}
-	return 0;
-	}
-	}
+#include <stdio.h>
+
+struct student {
+    char name[30];
+    int roll;
+    float marks[3], total, avg;
+};
+
+struct student read_student_data(struct student s) {
+    printf("Enter name: ");
+    scanf(" %29[^\n]", s.name); // if you enter more than 29 characters, then you are cooked fr.
+    printf("Enter roll number: ");
+    scanf("%d", &s.roll);
+    float total=0,avg=0;
+    for (int i = 0; i < 3; i++) {
+        printf("Enter marks for subject %d: ", i + 1);
+        scanf("%f", &s.marks[i]);
+        total+=s.marks[i];
+    }
+    avg=total/3;
+    s.total=total;
+    s.avg=avg;
+    return s;
+}
+
+void display_student_data(struct student s) {
+    printf("Name: %s\n", s.name);
+    printf("Roll Number: %d\n", s.roll);
+    for (int i = 0; i < 3; i++) {
+        printf("Marks for subject %d: %.2f\n", i + 1, s.marks[i]);
+    }
+    printf("Total Marks: %.2f\n", s.total);
+    printf("Average Marks: %.2f\n", s.avg);
+}
+
+int main() {
+    int n;
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    struct student students[n];
+    
+    for (int i = 0; i < n; i++) {
+        printf("\nEnter details for student %d:\n", i + 1);
+        students[i]=read_student_data(students[i]);
+    }
+    printf("\nDisplaying student details:\n");
+    printf("-------------------------------------------------\n");
+    for (int i = 0; i < n; i++) {
+        printf("\nSTUDENT %d:\n", i + 1);
+        display_student_data(students[i]);
+    }
+    return 0;
+}
 		
 		
 		
