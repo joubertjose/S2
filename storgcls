@@ -1,21 +1,21 @@
 #include <stdio.h>
-int exteto; // Declaration of an external variable (default initialization to 0)
+int exteto;
 
 void add() {
-  static int b = 34; // Static variable: initialized only once, retains value between function calls
-  printf(" Static B is %d\n", b++); // Prints the value of b and then increments it
+  static int b = 34; // Static variable:
+  printf(" Static B is %d\n", b++);
 }
 
 int main() {
-  auto int x = 5; // Automatic variable: exists only within the block it's declared
+  auto int x = 5;
   printf("Auto X is %d\n", x);
 
-  register int v = 35; // Register variable: request to store in a register for faster access (compiler may ignore)
+  register int v = 35;
   printf("Register v is %d\n", v);
 
-  add(); // First call to add: b is initialized to 34, prints 34
-  add(); // Second call to add: b is not re-initialized, prints 35
-  add(); // Third call to add: b is not re-initialized, prints 36
+  add();
+  add();
+  add();
 
   return 0;
 }
